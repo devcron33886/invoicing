@@ -1,0 +1,133 @@
+@extends('layouts.app')
+@section('content')
+    <!-- Page header -->
+    <div class="page-header d-print-none">
+        <div class="container-xl">
+            <div class="row g-2 align-items-center">
+                <div class="col">
+                    <h2 class="page-title">
+                        Account Settings
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            @if(auth()->user()->trial_ends_at)
+                <div class="alert alert-warning">
+                    <h3 class="text-center text-gray-800">
+                        You are on free trial of {{ now()->diffInDays(auth()->user()->trial_ends_at)}} days.
+                        <a href="{{ route('accounts.plans')}}">Choose your plan anytime.</a>
+                    </h3>
+                </div>
+            @endif
+            <div class="card">
+                <div class="row g-0">
+                   @include('partials.user-menu')
+                    <div class="col d-flex flex-column">
+                        <div class="card-body">
+                            <h2 class="mb-4">Plans</h2>
+
+                            <div class="row row-cards">
+                                @forelse($plans as $plan)
+                                    <div class="col-lg-4">
+                                        <div class="card card-md">
+                                            <div class="ribbon ribbon-top ribbon-bookmark bg-green">
+                                                <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled"
+                                                     width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                     stroke="currentColor" fill="none" stroke-linecap="round"
+                                                     stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                    <path
+                                                        d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
+                                                </svg>
+                                            </div>
+                                            <div class="card-body text-center">
+                                                <div
+                                                    class="text-uppercase text-muted font-weight-medium">{{ $plan->name }}</div>
+                                                <div class="display-5 fw-bold my-3">{{ $plan->formattedPrice() }}</div>
+                                                <ul class="list-unstyled lh-lg">
+                                                    <li><strong>10</strong> Users</li>
+                                                    <li>
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon me-1 text-success" width="24" height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M5 12l5 5l10 -10"/>
+                                                        </svg>
+                                                        Sharing Tools
+                                                    </li>
+                                                    <li>
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon me-1 text-success" width="24" height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <path d="M5 12l5 5l10 -10"/>
+                                                        </svg>
+                                                        Design Tools
+                                                    </li>
+                                                    <li>
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon me-1 text-danger" width="24" height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <line x1="18" y1="6" x2="6" y2="18"/>
+                                                            <line x1="6" y1="6" x2="18" y2="18"/>
+                                                        </svg>
+                                                        Private Messages
+                                                    </li>
+                                                    <li>
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/x -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             class="icon me-1 text-danger" width="24" height="24"
+                                                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                            <line x1="18" y1="6" x2="6" y2="18"/>
+                                                            <line x1="6" y1="6" x2="18" y2="18"/>
+                                                        </svg>
+                                                        Twitter API
+                                                    </li>
+                                                </ul>
+                                                <div class="text-center mt-4">
+                                                    <a href="{{ route('accounts.check-out',$plan->slug) }}"
+                                                       class="btn btn-green w-100">Choose plan</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <div class="col-12">
+                                        <div class="card card-md">
+                                            <div class="card-body">
+                                                <div class="row align-items-center">
+                                                    <div class="alert alert-warning">
+                                                        <h2 class="h3">Enterprise-ready. Reach out for a custom
+                                                            quote.</h2>
+                                                        <p class="m-0 text-muted">Tabler is designed to work great for
+                                                            large enterprises. Take a look at our feature
+                                                            comparison.</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
