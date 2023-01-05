@@ -115,7 +115,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center">
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-outline-primary"> Save customer</button>
+                                
                             </div>
                         </div>
                     </form>

@@ -19,11 +19,32 @@
     <link href="{{ asset('css/tabler-payments.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/demo.min.css') }}" rel="stylesheet"/>
+      <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.3/dist/alpine.js" defer></script>
     <style>
         body {
             font-family: 'Inconsolata', monospace !important;
             font-weight: 700;
         }
+        .StripeElement {
+            box-sizing: border-box;
+            height: 40px;
+            padding: 10px 12px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: white;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+            }
+            .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+            }
+            .StripeElement--invalid {
+            border-color: #fa755a;
+            }
+            .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;}
     </style>
 </head>
 <body>

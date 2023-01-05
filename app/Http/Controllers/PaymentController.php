@@ -12,9 +12,9 @@ class PaymentController extends Controller
     {
         $plan = Plan::findOrFail($request->input('plan_id'));
         try {
-            auth()->user()->newSubscription($plan->name, $plan->stripe_plan_id)->create($request->input('payment-method'));
+            auth()->user()->newSubscription($plan->name, $plan->stripe_plan_id)->create($request->paymentMethod);
 
-            return redirect()->route('accounts.plans')->with('Subscribed successfully');
+            return to_route('accounts.plans')->with('Subscribed successfully');
         } catch (Exception $exception) {
             return back()->withErrors($exception->getMessage());
         }

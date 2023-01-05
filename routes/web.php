@@ -30,7 +30,7 @@
 
         Route::get('/accounts/check-out/{plan:slug}', CheckoutController::class)->name('accounts.check-out');
 
-        Route::post('/account/pay', [PaymentController::class, 'processPayment'])->name('account.payment-process');
+        Route::post('/accounts/pay', [PaymentController::class, 'processPayment'])->name('account.payment-process');
 
         Route::get('account/plan/cancel', [PaymentController::class, 'cancel'])->name('plan.cancel');
 
